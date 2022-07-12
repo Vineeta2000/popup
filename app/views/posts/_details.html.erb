@@ -1,0 +1,45 @@
+<h1>Show post</h1>
+<!-- new add -->
+<td><%= link_to "Show", post_path(post), :"data-remote" => true , :class => "btn btn-primary" %>
+
+<div>
+ <strong>user : </strong>
+   <%= @post.user.user_name %>
+</div>
+<!-- new add
+ --><div>
+   <%#byebug%>
+   <% @photo.each do |pic|%>
+   <%= image_tag pic.picture.url(:medium) %>
+   <%end%>
+   <br>
+   <strong>Caption : </strong>
+   <%= @post.caption %>
+</div>
+
+<!-- create comment -->
+<%= form_tag("/posts/create_comment", method: 'post', :id=> "create_comment",remote: true ) do %>
+
+<br>
+
+<%#= form_with model: @comment , url:  create_comment_posts_path(post_id: @post.id), method: :post do |a|%>
+      <div class="field">
+         <%= label_tag :FEEDBACK %>
+         <%= text_field_tag :feedback %>
+      </div>
+
+       
+       <%= hidden_field_tag :post_id,@post.id %>
+
+      <div class="actions">
+         <%= submit_tag"create comment"%>
+      </div>
+<%end%>
+
+<h2>Comments</h2>
+<%= render "comment"%>
+
+
+
+<%= link_to "Back", root_path %><br>
+

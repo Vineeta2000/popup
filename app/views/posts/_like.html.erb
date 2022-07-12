@@ -1,0 +1,9 @@
+
+<% if comment.likes.map(&:user_id).include?(current_user.id) %>
+<%= link_to "Dislike" ,  dislike_comment_posts_path( comment_id: comment.id) , method: :delete , remote: true %><%= image_tag "logo/download (1).png",height: 20, width: 30%>
+<% else %>
+
+<%= link_to "Like" ,like_comment_posts_path( comment_id: comment.id) , method: :post , remote: true %><%= image_tag "logo/download (2) (1).png",height: 20, width: 30%>
+<% end %>
+
+<%= comment.likes.count %> likes

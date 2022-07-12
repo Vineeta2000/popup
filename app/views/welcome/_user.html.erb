@@ -1,0 +1,19 @@
+<br>
+<table>
+	<tr>
+		<th>User Name</th>
+		<th>Email</th>
+		<th>Role</th>
+	</tr>
+
+	<% User.all.each do |user| %>
+	<tr>
+		<td><%= user.user_name %></td>
+		<td><%= user.email %></td>
+		
+
+		<td><%= user.roles.collect(&:name) %></td>
+	</tr>
+	<%end%>
+</table>
+

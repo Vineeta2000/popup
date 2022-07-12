@@ -1,0 +1,7 @@
+# User.create(email:"admin44@gmail.com",password: "123456", user_name: "Admin")
+# #Role.create(name: "Admin")
+# # Role.create(name: "User")
+@role1 = Role.create(name: "Admin")
+@role2 = Role.create(name: "User")
+user = User.create(email: "admin@gmail.com", password: "vinu2314", user_name: "admin")
+user_role = user.user_roles.create(role_id: @role1.id)

@@ -1,0 +1,78 @@
+<h1><marquee>Miniii InStA
+<img src="assets/images/logo/Instagram(1).jpg"> </marquee></h1>
+
+<p class="navbar-text float-right">
+<% if user_signed_in? %>
+  Logged in as <strong><%= current_user.email %></strong>.
+
+  <br> and role is <%= current_user.role? %>
+
+  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %> | 
+  <%= link_to "New Post", new_post_path(current_user.id) %>
+  <% if current_user.role? == "Admin" %>
+
+  <%= render 'user' %>
+  <%else%>
+    <table>
+	<thead>
+		<tr>
+		<th>User Name</th>
+		<th>Email</th>
+		<th>Role</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><%= current_user.user_name %></td>
+			<td><%= current_user.email %></td>
+			<td><%= current_user.roles.collect(&:name) %></td>
+		</tr>
+	</tbody>
+</table> 
+<!-- new add -->
+<%#= link_to "New post" , new_post_path %>
+<!-- <h4>Create new post</h4>
+<%#= form_for(@new_post, url: create_post_posts_path , method: :post ) do |post| %>
+<%# debugger %>
+<%#= post.hidden_field :user_id, value: current_user.id %>
+
+Caption : <%#= post.text_field :caption  %>
+
+<%#= post.submit %>
+<%# end %> -->
+
+<% end %>
+<div>
+<%= render "post"%>
+</div>
+
+
+<% else %>
+  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+<% end %>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div class="modal-dialog" role="document">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h5 class="modal-title" id="exampleModalLabel">Show post detail</h5>
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+     <div class="modal-body">
+       <div id="mydetails">
+       
+       </div>
+     </div>
+     <div class="modal-footer">
+     </div>
+   </div>
+ </div>
+</div>
+

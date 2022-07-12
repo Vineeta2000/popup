@@ -1,0 +1,33 @@
+
+<h1>Post</h1>
+<table>
+ <tr>
+  <th>User</th>
+   <th>Caption</th>
+  
+
+<% @posts.each do |post| %>
+   <tr>
+    <td><em><%= post.user.user_name %></em></td>
+   <td><%= post.caption %></td>  
+   
+   <!-- <td><%#= link_to "show" ,  post_path(post.id )%></td> -->
+
+<% if post.user_id == current_user.id || current_user.role?.eql?("Admin") %>
+<td><%= link_to "Show", post_path(post), :"data-remote" => true , :class => "btn btn-primary" %>
+
+<%#= button_to "show" , post_path(post) , method: :get %></td>
+<td><%= button_to "edit" , edit_post_path(post) , method: :get ,:class => "btn btn-success"%></td> <td><%= button_to "delete" , post_path(post) , method: :delete, :class => "btn btn-danger"  %></td>
+<% else %>
+<td><%= button_to "show" , post_path(post) , method: :get %></td>
+
+   <%# if  post.user == current_user || current_user.role?.eql?("Admin") %>
+
+  <!--  <td><%#= link_to "edit",  edit_post_path(post) %></td>
+   <td><%#= link_to 'delete' , post_path(post.id) , method: :delete %></td> -->
+
+   <% end %>
+   
+ </tr>
+<%end%>
+</table>
